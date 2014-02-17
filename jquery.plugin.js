@@ -1,9 +1,9 @@
 (function(window, document, $, undefined){
     // First we set the name here and reference the variable everywhere else where we need the name
-    var pluginName = 'gc_plugin';
+    var pluginName = 'plugin';
     // The plugin is based on a constructor function that we call later on initialization.
     // The arguments passed are: the $element it was bound to and the options specified on initialization (if any)
-    var gc_Plugin = function ($element, options) {
+    var jqplugin = function ($element, options) {
         // We set the pluginName as a parameter of the plugin object for debugging purposes
         this.name = pluginName;
 // PLUGIN DEFAULT SETTINGS
@@ -43,16 +43,16 @@
         // We need to bind them plugin objects method property so they are accesible for the public interface
         _self.methods = {
 // PUBLIC METHODS
-            // This method would be avalible: $('div').gc_boilerplate('publicMethod1', var1, var2)
+            // This method would be avalible: $('div').plugin('publicMethod1', var1, var2)
             // Variables are passed along also
             publicMethod1: function (var1, var2) {
                 // Private method should include very little logic. Mostly just calling private methods if possible
             },
             publicMethod2: function() {
                 // by default the plugin method would return the jQuery object that was selected enabling you to do something like this:
-                // $('div').gc_boilerplate('publicMethod1').css('color', 'red');
+                // $('div').plugin('publicMethod1').css('color', 'red');
                 // But if you want to actually return a value with the method you just need to specify a return statment that returns something that is not undefined
-                // $('div').gc_boilerplate('publicMethod2') would return the value of _priavetVar instead of the jQuery object
+                // $('div').plugin('publicMethod2') would return the value of _priavetVar instead of the jQuery object
                 return _privateVar;
             }
         };
@@ -67,7 +67,7 @@
             var element = $(this);
             var plugin = element.data(pluginName);
             if (!plugin) {
-                plugin = new gc_Plugin($(this), method);
+                plugin = new jqplugin($(this), method);
             }
             element.data(pluginName, plugin);
             if (plugin.methods[method]) {
